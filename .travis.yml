@@ -4,22 +4,22 @@ services:
   - docker
 
 before_install:
-  - docker build -t mmarbury/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t cincobot/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true mmarbury/react-test npm test
+  - docker run -e CI=true cincobot/react-test npm test
 
 after_success:
-  - docker build -t mmarbury/multi-client ./client
-  - docker build -t mmarbury/multi-nginx ./nginx
-  - docker build -t mmarbury/multi-server ./server
-  - docker build -t mmarbury/multi-worker ./worker
+  - docker build -t cincobot/multi-client ./client
+  - docker build -t cincobot/multi-nginx ./nginx
+  - docker build -t cincobot/multi-server ./server
+  - docker build -t cincobot/multi-worker ./worker
   # Login to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push mmarbury/multi-client
-  - docker push mmarbury/multi-nginx
-  - docker push mmarbury/multi-server
-  - docker push mmarbury/multi-worker
+  - docker push cincobot/multi-client
+  - docker push cincobot/multi-nginx
+  - docker push cincobot/multi-server
+  - docker push cincobot/multi-worker
 
 
